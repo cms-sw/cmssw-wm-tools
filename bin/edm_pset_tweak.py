@@ -15,7 +15,10 @@
 #
 
 import pickle
-import argparse
+try: 
+   import argparse
+except ImportError: #get it from this package instead
+   import archived_argparse as argparse 
 import sys
 import json
 
