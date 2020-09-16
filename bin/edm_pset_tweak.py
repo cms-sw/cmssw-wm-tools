@@ -14,6 +14,7 @@
 # properly handles multiple pkls and mulitple jsons (all jsons are applied to all pkls)
 #
 
+import FWCore.ParameterSet.Config as cms
 import pickle
 try: 
    import argparse
@@ -24,14 +25,17 @@ import json
 
 def apply_tweak(process, key, value):
     key_split = key.split('.')
-    param = process
+    param=process
     if key_split[0] == "process":
         key_split = key_split[1:]
-    for p in key_split:
+    for p in key_split[:-1]:
+        if not hasattr(param,p):
+            return 1
         param = getattr(param, p)
         if param is None:
             return 1
-    param = value
+    setattr(param,key_split[-1],value)
+    print("Set attribute "+key+" to"+str(getattr(param,key_split[-1])))
     return 0
 
 
@@ -98,8 +102,6 @@ def main():
                 print("Tweak not applied "+tweak[0]+" "+str(tweak[1]))
                 if not args.allow_failed_tweaks:
                     sys.exit(1)
-            else:
-                print("Tweak applied "+tweak[0]+" "+str(tweak[1]))
 
         with open(output_file_names[i], "wb") as output_file:
             if output_file.closed:
