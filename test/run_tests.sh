@@ -48,3 +48,14 @@ then
 else
   echo "Failed to add protection for GUID" >&2
 fi
+
+# do lazy download
+cmssw_enable_lazy_download.py --input_pkl $test_dir/pset1.pkl --output_pkl pset_new.pkl 
+
+if [ $? -eq 0 ]
+then
+  echo "Condor applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/pset1.pkl pset_new.pkl --param SiteLocalConfigService.overrideSourceCacheHintDir
+else
+  echo "Failed to add protection for GUID" >&2
+fi
