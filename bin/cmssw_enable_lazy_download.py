@@ -12,7 +12,7 @@ from tweak_program_helpers import make_parser, do_loop, get_cmssw_version, isCMS
 
 
 
-def handle_seeds(process, args):
+def handle_lazy(process, args):
 
    process.add_(cms.Service("SiteLocalConfigService",
                             overrideSourceCacheHintDir=cms.untracked.string("lazy-download")))
@@ -28,6 +28,6 @@ def main():
     parser = init_argparse()
     args = parser.parse_args()
 
-    do_loop(args, handle_seeds)
+    do_loop(args, handle_lazy)
 
 main()

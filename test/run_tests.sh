@@ -59,3 +59,15 @@ then
 else
   echo "Failed to add protection for GUID" >&2
 fi
+
+# do dqmsaver
+cmssw_handle_dqm_filesaver.py --input_pkl $test_dir/pset1.pkl --output_pkl pset_new.pkl --multiRun --datasetName myDataset
+
+if [ $? -eq 0 ]
+then
+  echo "Condor applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/pset1.pkl pset_new.pkl --param dqmSaver.workflow dqmSaver.runIsComplete dqmSaver.forceRunNumber
+else
+  echo "Failed to add protection for GUID" >&2
+fi
+
