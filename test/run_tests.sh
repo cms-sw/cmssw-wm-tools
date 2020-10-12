@@ -36,3 +36,15 @@ then
 else
   echo "Failed to add protection for GUID" >&2
 fi
+
+
+# do Condortest
+cmssw_handle_condor_status_service.py --input_pkl $test_dir/pset1.pkl --output_pkl pset_new.pkl --name step3
+
+if [ $? -eq 0 ]
+then
+  echo "Condor applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/pset1.pkl pset_new.pkl --param CondorStatusService.tag
+else
+  echo "Failed to add protection for GUID" >&2
+fi
