@@ -71,3 +71,15 @@ else
   echo "Failed to add protection for GUID" >&2
 fi
 
+
+# do create process
+cmssw_wm_create_process.py --output_pkl pset_new.pkl --funcname merge --funcargs create_process.json
+
+if [ $? -eq 0 ]
+then
+  echo "Create process applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/pset1.pkl pset_new.pkl --param "name"
+else
+  echo "Failed to run create process" >&2
+fi
+

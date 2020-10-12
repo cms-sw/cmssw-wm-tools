@@ -12,8 +12,8 @@ from tweak_program_helpers import make_parser, do_loop, get_cmssw_version, isCMS
 
 
 
-def handle_seeds(process, args):
-   name = args.name[0]
+def handle_condor(process, args):
+   name = args.name
 
    if isCMSSWSupported(get_cmssw_version(), "CMSSW_7_6_0"):
       process.add_(cms.Service("CondorStatusService", tag=cms.untracked.string("_%s_" % name)))
@@ -22,7 +22,7 @@ def handle_seeds(process, args):
 
 def init_argparse():
     parser = make_parser("Handle random number seeding")
-    parser.add_argument('--name', nargs='+', required=True)
+    parser.add_argument('--name', required=True)
     return parser
 
 
@@ -30,6 +30,6 @@ def main():
     parser = init_argparse()
     args = parser.parse_args()
 
-    do_loop(args, handle_seeds)
+    do_loop(args, handle_condor)
 
 main()
