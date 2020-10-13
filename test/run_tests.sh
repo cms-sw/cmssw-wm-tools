@@ -83,3 +83,14 @@ else
   echo "Failed to run create process" >&2
 fi
 
+# do pileup
+cmssw_handle_pileup.py --input_pkl $test_dir/pset1.pkl --output_pkl pset_new.pkl --pileup_dict pileup.json --skip_pileup_events 100
+
+if [ $? -eq 0 ]
+then
+  echo "Pileup process applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/pset1.pkl pset_new.pkl --param "name"
+else
+  echo "Failed to run pileup process" >&2
+fi
+
