@@ -59,7 +59,7 @@ def process_pileup_mixing_modules(process, args, modules, requestedPileupType):
             continue
          inputTypeAttrib.fileNames = cms.untracked.vstring()
          if pileupType == requestedPileupType:
-            eventsAvailable = pileupDict[pileupType].eventsAvailable
+            eventsAvailable = pileupDict[pileupType]["eventsAvailable"]
             for fileLFN in pileupDict[pileupType]["FileList"]:
                # vstring does not support unicode
                inputTypeAttrib.fileNames.append(str(fileLFN))
