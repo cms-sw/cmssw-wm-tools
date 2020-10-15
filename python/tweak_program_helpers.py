@@ -116,16 +116,19 @@ def isEnforceGUIDInFileNameSupported(thisCMSSW):
     return False
 
 def adjust_source_guid(input_source):
-   current_cmssw = get_cmssw_version()
-   
-   if not isEnforceGUIDInFileNameSupported(current_cmssw):
-      return 
-      
    import re
    guidRegEx = re.compile("[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}.root$")
+   current_cmssw = get_cmssw_version()
+
+   if not isEnforceGUIDInFileNameSupported(current_cmssw):
+      print("GUID enforcement not supported in this CMSSW release ("+current_cmssw+")")
+      return 
+   print("GUID in this CMSSW release ("+current_cmssw+") is supported")
+   print("Considering a source of type "+input_source.type_())
    if input_source.type_() not in ["PoolSource", "EmbeddedRootSource"]:
       return
    if not guidRegEx.search(input_source.fileNames[0]):
       return
    input_source.enforceGUIDInFileName = cms.untracked.bool(True)
+   print("Enabled GUID enforcement for "+input_source.name_())
    return

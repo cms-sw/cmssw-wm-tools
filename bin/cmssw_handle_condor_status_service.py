@@ -17,7 +17,9 @@ def handle_condor(process, args):
 
    if isCMSSWSupported(get_cmssw_version(), "CMSSW_7_6_0"):
       process.add_(cms.Service("CondorStatusService", tag=cms.untracked.string("_%s_" % name)))
-      
+      print("Added CondorStatusService")
+   else:
+      print("CondorStatusService is not supported")
    return process
 
 def init_argparse():

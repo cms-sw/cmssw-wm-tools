@@ -49,8 +49,8 @@ def read_json(f):
 def process_pileup_mixing_modules(process, args, modules, requestedPileupType):
 # this needs to be read from json
    pileupDict = read_json(args.pileup_dict)
-
    for m in modules:
+      print("Processing " + m.type_() + " " + m.label_() + " type " + requestedPileupType)
       for pileupType in pileupDict.keys():
          # there should be either "input" or "secsource" attributes
          # and both "MixingModule", "DataMixingModule" can have both
@@ -60,10 +60,11 @@ def process_pileup_mixing_modules(process, args, modules, requestedPileupType):
          inputTypeAttrib.fileNames = cms.untracked.vstring()
          if pileupType == requestedPileupType:
             eventsAvailable = pileupDict[pileupType]["eventsAvailable"]
+            print("    Found "+str(eventsAvailable)+" events")
             for fileLFN in pileupDict[pileupType]["FileList"]:
                # vstring does not support unicode
                inputTypeAttrib.fileNames.append(str(fileLFN))
-
+            print("    Added %4d files"%len(pileupDict[pileupType]["FileList"]))
             if requestedPileupType == 'data':
                if args.skip_pileup_events: 
                   # For deterministic pileup, we want to shuffle the list the

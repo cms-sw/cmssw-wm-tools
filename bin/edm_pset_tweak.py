@@ -35,7 +35,7 @@ def apply_tweak(process, key, value):
         if param is None:
             return 1
     setattr(param,key_split[-1],value)
-    print("Set attribute "+key+" to"+str(getattr(param,key_split[-1])))
+    print("Set attribute "+key+" to "+str(getattr(param,key_split[-1])))
     return 0
 
 

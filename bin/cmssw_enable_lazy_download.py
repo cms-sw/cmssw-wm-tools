@@ -16,7 +16,7 @@ def handle_lazy(process, args):
 
    process.add_(cms.Service("SiteLocalConfigService",
                             overrideSourceCacheHintDir=cms.untracked.string("lazy-download")))
-      
+   print("Added lazy-download to SIteLocalConfigService")
    return process
 
 def init_argparse():

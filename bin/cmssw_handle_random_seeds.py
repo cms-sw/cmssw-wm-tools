@@ -10,8 +10,6 @@ import sys, re, os
 
 from tweak_program_helpers import make_parser, do_loop, get_cmssw_version, isCMSSWSupported
 
-
-
 def handle_seeds(process, args):
 
     seedings = args.seeding
@@ -21,14 +19,16 @@ def handle_seeds(process, args):
 
     for seeding in seedings:
        if seeding == "ReproducibleSeeding":
+          #DL: this code looks like a no-op to me
           randService = process.RandomNumberGeneratorService
           for x in randService:
              getattr(process.RandomNumberGeneratorService,x._internal_name).initialSeed = x.initialSeed
+          print("Recalled random seeds from saved seeds")
        else:
           from IOMC.RandomEngine.RandomServiceHelper import RandomNumberServiceHelper
           helper = RandomNumberServiceHelper(process.RandomNumberGeneratorService)
           helper.populate()
-        
+          print("Populared random numbers of RandomNumberService")
     return process
 
 def init_argparse():

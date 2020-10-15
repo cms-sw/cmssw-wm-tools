@@ -14,7 +14,6 @@ from tweak_program_helpers import isCMSSWSupported, isEnforceGUIDInFileNameSuppo
 def adjust_guid(process, args):
 
     input_source_names = args.input_source
-
     for input_source_name in input_source_names:
        input_source = process
        name_sp = input_source_name.split('.')
