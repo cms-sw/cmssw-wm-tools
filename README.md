@@ -30,11 +30,13 @@ Adjusts GUID when possible, as in [WMCore handleEnforceGUIDInFileName](https://g
 
 Enables condor service when possible, as in [WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
 
-5. ```cmssw_handle_dqm_filesaver.py```
+5. ```cmssw_handle_dqm_filesaver.py --input_pkl reco.pkl --output_pkl pset_new.pkl --multiRun --datasetName myDataset```
+
+Handles dqm setup manipulation as in [WMCore handleDQMFileSaver](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L532-L562). Arguments include ```--multiRun``` (true if argument given), ```--datasetName``` (string), ```--runIsComplete``` (true if argument given), and ```--runLimits``` (string).
 
 6. ```cmssw_handle_pileup.py  --input_pkl digi.pkl --output_pkl pset_new.pkl --pileup_dict pileup.json --skip_pileup_events 100```
 
-which is meant to support [the handlePileup use case in WMCore](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L376-L493). The json file contains 
+Is meant to support [the handlePileup use case in WMCore](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L376-L493). The json file contains 
 ```
 { "data" : { "eventsAvailable" : 10000,
 	     "FileList" : ["dud.root", "foo.root"]
