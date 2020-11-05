@@ -64,7 +64,22 @@ then
   echo "Random seedings applied ok, lets check it"
   $test_dir/get_pset_param.py --input_pkl $test_dir/digi.pkl pset_new.pkl --param RandomNumberGeneratorService.generator --output out_random.json
 else
-  echo "Failed to add protection for GUID" >&2
+  echo "Failed test for random seeds" >&2
+fi
+
+echo ""
+rm -f pset_new.pkl
+
+# do random test reproductible
+echo "Testing... random"
+$test_dir/../bin/cmssw_handle_random_seeds.py --input_pkl $test_dir/digi.pkl --output_pkl pset_new.pkl --seeding ReproducibleSeeding --reproducible_json repro_random.json
+
+if [ $? -eq 0 ]
+then
+  echo "Random seedings applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/digi.pkl pset_new.pkl --param RandomNumberGeneratorService.generator --output out_random_repro.json
+else
+  echo "Failed to set random seeds in reproducible test" >&2
 fi
 
 echo ""
