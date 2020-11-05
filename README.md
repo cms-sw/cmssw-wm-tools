@@ -20,15 +20,15 @@ For this script and the ones, below, the output pkl options can be either empty 
  
 2. ```cmssw_enable_lazy_download.py --input_pkl reco.pkl --output_pkl pset_new.pkl ```
 
-[Enables lazy_download when possible, as in WMCore handleSpecialCERNMergeSettings](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L613-L629)
+Enables lazy download when possible, as in [WMCore handleSpecialCERNMergeSettings](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L613-L629)
 
 3. ```cmssw_enforce_guid_in_filename.py --input_pkl digi.pkl --output_pkl pset_new.pkl --input_source source```
 
-[Adjusts GUID when possible, as in WMCore handleEnforceGUIDInFileName](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L644-L684)
+Adjusts GUID when possible, as in [WMCore handleEnforceGUIDInFileName](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L644-L684)
 
 4. ```cmssw_handle_condor_status_service.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --name step3```
 
-[Enables condor service when possible, as in WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
+Enables condor service when possible, as in [WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
 
 5. ```cmssw_handle_dqm_filesaver.py```
 
