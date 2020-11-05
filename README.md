@@ -14,19 +14,23 @@ or
 or
 ``` { "maxEvents.input" : 100}```
  
- properly handles multiple pkls and mulitple jsons (all jsons are applied to all pkls). It has an option (skip_if_set) to skip tweaks if the parameter is already present (eg, [for case link this one](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L59-L68)).  The output pkl options can be either empty (overwrite the input) or one output file per input file.
+ properly handles multiple pkls and mulitple jsons (all jsons are applied to all pkls). It has an option (skip_if_set) to skip tweaks if the parameter is already present (eg, [for case link this one](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L59-L68)).  
  
-2. 
-```cmssw_enable_lazy_download.py```
+For this script and the ones, below, the output pkl options can be either empty (overwrite the input) or one output file per input file.
+ 
+2. ```cmssw_enable_lazy_download.py --input_pkl reco.pkl --output_pkl pset_new.pkl ```
 
-3. 
-```cmssw_enforce_guid_in_filename.py```
+[Enables lazy_download when possible, as in WMCore handleSpecialCERNMergeSettings](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L613-L629)
 
-4. 
-```cmssw_handle_condor_status_service.py```
+3. ```cmssw_enforce_guid_in_filename.py --input_pkl digi.pkl --output_pkl pset_new.pkl --input_source source```
 
-5. 
-```cmssw_handle_dqm_filesaver.py```
+[Adjusts GUID when possible, as in WMCore handleEnforceGUIDInFileName](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L644-L684)
+
+4. ```cmssw_handle_condor_status_service.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --name step3```
+
+[Enables condor service when possible, as in WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
+
+5. ```cmssw_handle_dqm_filesaver.py```
 
 6. ```cmssw_handle_pileup.py  --input_pkl digi.pkl --output_pkl pset_new.pkl --pileup_dict pileup.json --skip_pileup_events 100```
 
@@ -41,13 +45,11 @@ which is meant to support [the handlePileup use case in WMCore](https://github.c
 }
 ```
 
-7. 
-```cmssw_handle_random_seeds.py --input_pkl digi.pkl --output_pkl pset_new.pkl --seeding ReproducibleSeeding --reproducible_json repro_random.json```
+7. ```cmssw_handle_random_seeds.py --input_pkl digi.pkl --output_pkl pset_new.pkl --seeding ReproducibleSeeding --reproducible_json repro_random.json```
 
 The ```--reproducible_json``` option is needed only if ```--seeding``` is ```ReproducibleSeeding```. Multiple ```--seeding``` parameters are supported, as are ```--input_pkl``` and ```--output_pkl```.
 
-8. 
-```cmssw_wm_create_process.py```
+8. ```cmssw_wm_create_process.py```
 
 
 9. tweak_maker_lite which contains the TweakMakerLite class
