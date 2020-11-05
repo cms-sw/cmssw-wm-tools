@@ -49,9 +49,16 @@ Is meant to support [the handlePileup use case in WMCore](https://github.com/dmw
 
 7. ```cmssw_handle_random_seeds.py --input_pkl digi.pkl --output_pkl pset_new.pkl --seeding ReproducibleSeeding --reproducible_json repro_random.json```
 
-The ```--reproducible_json``` option is needed only if ```--seeding``` is ```ReproducibleSeeding```. Multiple ```--seeding``` parameters are supported, as are ```--input_pkl``` and ```--output_pkl```.
+The ```--reproducible_json``` option is needed only if ```--seeding``` is ```ReproducibleSeeding```. Multiple ```--seeding``` parameters are supported.
 
-8. ```cmssw_wm_create_process.py```
+8. ```cmssw_wm_create_process.py --output_pkl pset_new.pkl --funcname merge --funcargs create_process.json```
 
+```
+Meant to replace the Tier-0 interfaces in [WMCore createProcesses](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L192-L237). the ```funcname``` argument identifies which function to be called and the ```funcargs``` argument points to a json file with all of the arguments to be passed into that function. Eg,
+```
+{
+ "scenario" : "ppRun2"
+}
+```
 
 9. tweak_maker_lite which contains the TweakMakerLite class
