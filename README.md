@@ -21,22 +21,22 @@ or
  
 For this script and the ones, below, the output pkl options can be either empty (overwrite the input) or one output file per input file.
  
-2. Enables lazy download when possible, as in [WMCore handleSpecialCERNMergeSettings](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L613-L629).
+2. Enable lazy download when possible, as in [WMCore handleSpecialCERNMergeSettings](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L613-L629).
 ```
 cmssw_enable_lazy_download.py --input_pkl reco.pkl --output_pkl pset_new.pkl 
 ```
 
-3. Adjusts GUID when possible, as in [WMCore handleEnforceGUIDInFileName](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L644-L684).
+3. Adjust GUID when possible, as in [WMCore handleEnforceGUIDInFileName](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L644-L684).
 ```
 cmssw_enforce_guid_in_filename.py --input_pkl digi.pkl --output_pkl pset_new.pkl --input_source source
 ```
 
-4. Enables condor service when possible, as in [WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
+4. Enable condor service when possible, as in [WMCore handleCondorStatusService](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L631-L642)
 ```
 cmssw_handle_condor_status_service.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --name step3
 ```
 
-5. Handles dqm setup manipulation as in [WMCore handleDQMFileSaver](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L532-L562).
+5. Handle dqm setup manipulation as in [WMCore handleDQMFileSaver](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L532-L562).
 ```
 cmssw_handle_dqm_filesaver.py --input_pkl reco.pkl --output_pkl pset_new.pkl --multiRun --datasetName myDataset
 ```
