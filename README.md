@@ -3,8 +3,7 @@ Repository for release independent tools to glue together cmssw, wmagent, and wm
 
 Currently there are nine tools
 
-1.
-```edm_pset_tweak.py --input_pkl RunPromptRecoCfg.pkl --output_pkl ouput.pkl --json tweaks.json```
+1. ```edm_pset_tweak.py --input_pkl RunPromptRecoCfg.pkl --output_pkl ouput.pkl --json tweaks.json```
 
 tweaks.json can be
 ```  [{ "process.maxEvents.input" : 100}]```
@@ -29,8 +28,7 @@ or
 5. 
 ```cmssw_handle_dqm_filesaver.py```
 
-6. 
-```cmssw_handle_pileup.py  --input_pkl digi.pkl --output_pkl pset_new.pkl --pileup_dict pileup.json --skip_pileup_events 100```
+6. ```cmssw_handle_pileup.py  --input_pkl digi.pkl --output_pkl pset_new.pkl --pileup_dict pileup.json --skip_pileup_events 100```
 
 which is meant to support [the handlePileup use case in WMCore](https://github.com/dmwm/WMCore/blob/master/src/python/WMCore/WMRuntime/Scripts/SetupCMSSWPset.py#L376-L493). The json file contains 
 ```
