@@ -1,0 +1,7 @@
+{ "data" : { "eventsAvailable" : 10000,
+	     "FileList" : ["dud.root", "foo.root"]
+	   },
+  "mc" :   { "eventsAvailable" : 50000,
+	     "FileList" : ["dud_mc.root", "mc_foo.root"]
+	   }
+}

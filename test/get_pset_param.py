@@ -27,24 +27,33 @@ def init_argparse():
     )
     parser.add_argument('--param', nargs='+', required=True)
     parser.add_argument('--input_pkl', nargs='+', required=True)
+    parser.add_argument('--output', required=False)
     return parser
 
 
 def main():
     parser = init_argparse()
     args = parser.parse_args()
+    results={}
 
     for i in range(len(args.input_pkl)):
-        with open(args.input_pkl[i], "rb") as pkl_file:
-            try:
-                process = pickle.load(pkl_file)
-            except (IOError, OSError, pickle.PickleError, pickle.UnpicklingError):
-                print("Not a valid pickle file " +
-                      args.input_pkl[i]) + "- stopping"
-                sys.exit(1)
-        print(args.input_pkl[i]) 
-        for param in args.param:
+       results[args.input_pkl[i]]={}
+       with open(args.input_pkl[i], "rb") as pkl_file:
+          try:
+             process = pickle.load(pkl_file)
+          except (IOError, OSError, pickle.PickleError, pickle.UnpicklingError):
+             print("Not a valid pickle file " +
+                   args.input_pkl[i]) + "- stopping"
+             sys.exit(1)
+       print(args.input_pkl[i]) 
+       for param in args.param:
            print("   "+param+" is "+str(param_value(process,param)))
+           results[args.input_pkl[i]][param]=str(param_value(process,param))
+
+    import json
+    if args.output is not None:
+       with open(args.output,'w') as output_file:
+          json.dump(results, output_file)
 
 main()
 
