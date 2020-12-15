@@ -79,3 +79,8 @@ The ```funcname``` argument identifies which function to be called and the ```fu
 ```
 
 9. tweak_maker_lite which contains the TweakMakerLite class
+
+10. Tweak any producers with the parameter nEvents to match the max_events of the process.
+```
+cmssw_handle_nEvents.py --input_pkl digi.pkl --output_pkl pset_new.pkl 
+```
