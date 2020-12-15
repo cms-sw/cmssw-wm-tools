@@ -158,3 +158,18 @@ fi
 
 echo ""
 rm -f pset_new.pkl
+
+# nEvents
+echo "Testing... nEvents"
+$test_dir/../bin/cmssw_handle_nEvents.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl
+
+if [ $? -eq 0 ]
+then
+  echo "nEvents tweak applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl  pset_new.pkl --param "process.source" --output out_pileup.json
+else
+  echo "Failed to run nEvents tweaking" >&2
+fi
+
+echo ""
+rm -f pset_new.pkl

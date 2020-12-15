@@ -9,7 +9,7 @@ except ImportError:  #get it from this package instead
 import sys, os
 
 from tweak_program_helpers import make_parser, do_loop, get_cmssw_version, adjust_source_guid 
-from tweak_program_helpers import isCMSSWSupported, isEnforceGUIDInFileNameSupported
+from tweak_program_helpers import isCMSSWSupported
 
 def adjust_guid(process, args):
 
