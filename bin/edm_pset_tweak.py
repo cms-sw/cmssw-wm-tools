@@ -23,7 +23,28 @@ except ImportError: #get it from this package instead
 import sys
 import json
 
+def convert_unicode_to_str(data):
+    PY3 = sys.version_info[0] == 3
+    if PY3:
+        return data
+    if type(data) in (int, float, str, bool):
+            return data
+    elif type(data) == unicode:
+            return str(data)
+    elif type(data) in (list, tuple, set):
+            data = list(data)
+            for i,v in enumerate(data):
+                    data[i] = convert_unicode_to_str(v)
+    elif type(data) == dict:
+            for i,v in data.iteritems():
+                    data[i] = convert_unicode_to_str(v)
+    else:
+            print("invalid dataect in data, converting to string")
+            data = str(data) 
+    return data
+
 def apply_tweak(process, key, value, skip_if_set):
+    value = convert_unicode_to_str(value)
     key_split = key.split('.')
     param=process
     if key_split[0] == "process":
@@ -37,7 +58,6 @@ def apply_tweak(process, key, value, skip_if_set):
     if skip_if_set and hasattr(param,key_split[-1]): 
        print("Attribute already set "+key+". Not changing")
        return 0
-
     setattr(param,key_split[-1],value)
     print("Set attribute "+key+" to "+str(getattr(param,key_split[-1])))
     return 0
