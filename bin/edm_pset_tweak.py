@@ -45,6 +45,11 @@ def convert_unicode_to_str(data):
 
 def apply_tweak(process, key, value, skip_if_set):
     value = convert_unicode_to_str(value)
+    # Allow setting specific types from json
+    if isinstance(value, str):
+        value_split = value.split('.')
+        if value_split[0] == "customTypeCms":
+            value = eval('cms.{0}'.format('.'.join(value_split[1:])))
     key_split = key.split('.')
     param=process
     if key_split[0] == "process":
