@@ -1,7 +1,6 @@
-{ "data" : { "eventsAvailable" : 10000,
-	     "FileList" : ["dud.root", "foo.root"]
-	   },
-  "mc" :   { "eventsAvailable" : 50000,
-	     "FileList" : ["dud_mc.root", "mc_foo.root"]
-	   }
+{"mc": ["/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270035/D3B03F7C-7EE2-1249-B0D1-F0D0529340C2.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270031/0BF01396-2243-7A44-81B3-3E866AA4B4EE.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270032/1CE80F0D-375B-A54A-A15A-4693920AD445.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270034/0E99F3C4-393C-6D4E-8F28-F4C406027D8E.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270034/30583BF1-A771-244F-A822-704D7D8FFBE7.root"],
+"data": ["/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270035/D3B03F7C-7EE2-1249-B0D1-F0D0529340C2.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270031/0BF01396-2243-7A44-81B3-3E866AA4B4EE.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270032/1CE80F0D-375B-A54A-A15A-4693920AD445.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270034/0E99F3C4-393C-6D4E-8F28-F4C406027D8E.root", "/store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/PUAutumn18_102X_upgrade2018_realistic_v15-v1/270034/30583BF1-A771-244F-A822-704D7D8FFBE7.root"]
 }
+
+
+
