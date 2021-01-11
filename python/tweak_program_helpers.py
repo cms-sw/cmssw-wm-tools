@@ -130,5 +130,5 @@ def adjust_source_guid(input_source):
    if not guidRegEx.search(input_source.fileNames[0]):
       return
    input_source.enforceGUIDInFileName = cms.untracked.bool(True)
-   print("Enabled GUID enforcement for "+input_source.name_())
+   print("Enabled GUID enforcement for a "+input_source.type_())
    return
