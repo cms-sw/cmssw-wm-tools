@@ -14,13 +14,15 @@
 # properly handles multiple pkls and mulitple jsons (all jsons are applied to all pkls)
 #
 
+import sys, os
+sys.path.insert(0, os.path.join( os.path.dirname(os.path.abspath(__file__)), '..', 'python'))
+
 import FWCore.ParameterSet.Config as cms
 import pickle
 try: 
    import argparse
 except ImportError: #get it from this package instead
    import archived_argparse as argparse 
-import sys
 import json
 
 def convert_unicode_to_str(data):

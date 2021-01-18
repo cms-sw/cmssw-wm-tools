@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
+import sys, os
+sys.path.insert(0, os.path.join( os.path.dirname(os.path.abspath(__file__)), '..', 'python'))
+
 import FWCore.ParameterSet.Config as cms
 import pickle
 try: 
    import argparse
 except ImportError:  #get it from this package instead
    import archived_argparse as argparse 
-import sys, re, os
+import re, os
 import json
 
 from tweak_program_helpers import make_parser
