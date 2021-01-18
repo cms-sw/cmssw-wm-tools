@@ -21,6 +21,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.input --output out_param.json
 else
   echo "Failed to apply tweak" >&2
+  exit 1
 fi
 
 
@@ -34,6 +35,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.input --output out_param_skip.json
 else
   echo "Failed to apply tweak" >&2
+  exit 1
 fi
 
 
@@ -50,6 +52,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/digi.pkl pset_new.pkl --param source.enforceGUIDInFileName --output out_guid.json
 else
   echo "Failed to add protection for GUID" >&2
+  exit 1
 fi
 
 echo ""
@@ -65,6 +68,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/digi.pkl pset_new.pkl --param RandomNumberGeneratorService.generator --output out_random.json
 else
   echo "Failed test for random seeds" >&2
+  exit 1
 fi
 
 echo ""
@@ -80,6 +84,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/digi.pkl pset_new.pkl --param RandomNumberGeneratorService.generator --output out_random_repro.json
 else
   echo "Failed to set random seeds in reproducible test" >&2
+  exit 1
 fi
 
 echo ""
@@ -95,6 +100,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param CondorStatusService.tag --output out_condor.json
 else
   echo "Failed to add protection for GUID" >&2
+  exit 1
 fi
 echo ""
 rm -f pset_new.pkl
@@ -109,6 +115,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param SiteLocalConfigService.overrideSourceCacheHintDir --output out_lazy.json
 else
   echo "Lazy download to add protection for GUID" >&2
+  exit 1
 fi
 
 echo ""
@@ -124,6 +131,7 @@ then
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param dqmSaver.workflow dqmSaver.runIsComplete dqmSaver.forceRunNumber  --output out_dqm.json
 else
   echo "Failed to add protection for dqmsaver" >&2
+  exit 1
 fi
 
 echo ""
@@ -139,6 +147,7 @@ then
   $test_dir/get_pset_param.py --input_pkl pset_new.pkl --param "_Process__name"  --output out_create_process.json
 else
   echo "Failed to run create process" >&2
+  exit 1
 fi
 
 echo ""
@@ -154,6 +163,7 @@ then
   $test_dir/get_pset_param.py --input_pkl  pset_new.pkl --param "mixData.input.fileNames" --output out_pileup.json
 else
   echo "Failed to run pileup process" >&2
+  exit 1
 fi
 
 echo ""
@@ -169,6 +179,7 @@ then
   $test_dir/get_pset_param.py --input_pkl  pset_new.pkl --param "process.source" --output out_pileup.json
 else
   echo "Failed to run nEvents tweaking" >&2
+  exit 1
 fi
 
 echo ""
