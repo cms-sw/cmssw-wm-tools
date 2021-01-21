@@ -127,7 +127,7 @@ def adjust_source_guid(input_source):
    print("Considering a source of type "+input_source.type_())
    if input_source.type_() not in ["PoolSource", "EmbeddedRootSource"]:
       return
-   if inputSource.type_() == "PoolSource" and inputSource.fileNames:
+   if input_source.type_() == "PoolSource" and input_source.fileNames:
       if not guidRegEx.search(input_source.fileNames[0]):
          print("Not enabling enforceGUIDInFileName due to non-GUID input file names in poolsource")
          return
