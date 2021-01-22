@@ -20,7 +20,7 @@ def create_process(args,func_args):
 
    
    if args.funcname == "merge":
-      if not args.useErrorDataset:
+      if args.useErrorDataset:
          func_args['outputmod_label'] = "MergedError"
          
       try:
