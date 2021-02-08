@@ -22,11 +22,13 @@ def handle_dqmSaver(process, args):
    if args.multiRun and isCMSSWSupported(get_cmssw_version(), "CMSSW_8_0_0"):
       setattr(process.dqmSaver,"forceRunNumber",cms.untracked.int32(999999))
 
-   if args.datasetName:
+   if args.datasetName:     
       if args.multiRun:
          datasetName = args.datasetName.rsplit('/', 1)
          datasetName[0] += args.runLimits
          datasetName = "/".join(datasetName)
+      else:
+         datasetName = args.datasetName
       setattr(process.dqmSaver,"workflow", cms.untracked.string(datasetName))
    return process
 
