@@ -8,6 +8,8 @@ except ImportError:  #get it from this package instead
    import archived_argparse as argparse 
 import sys, re, os
 
+# Use the same default protocol as in python 2.
+pickle.DEFAULT_PROTOCOL = 0
 
 def init_argparse():
    parser = argparse.ArgumentParser(
