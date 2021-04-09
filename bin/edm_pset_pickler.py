@@ -2,10 +2,10 @@
 
 import FWCore.ParameterSet.Config as cms
 import pickle
-try: 
+try:
    import argparse
 except ImportError:  #get it from this package instead
-   import archived_argparse as argparse 
+   import archived_argparse as argparse
 import sys, re, os
 
 # Use the same default protocol as in python 2.
@@ -16,7 +16,7 @@ def init_argparse():
       usage="%(prog)s [OPTION] [FILE]...",
       description="Pickle a pset file"
    )
-   
+
    parser.add_argument('--input', required=True)
    parser.add_argument('--output_pkl', required=True)
    return parser
@@ -24,12 +24,14 @@ def init_argparse():
 def main():
     parser = init_argparse()
     args = parser.parse_args()
+    globals={}
+    locals={}
 
     with open(args.input) as f:
         code = compile(f.read(), args.input, 'exec')
-        exec(code, globals(), locals())
+        exec(code, globals, locals)
 
     with open(args.output_pkl, "wb") as pHandle:
-        pickle.dump(process, pHandle)
+        pickle.dump(locals['process'], pHandle, protocol=pickle.DEFAULT_PROTOCOL)
 
 main()
