@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys, os
 sys.path.insert(0, os.path.join( os.path.dirname(os.path.abspath(__file__)), '..', 'python'))
 
@@ -14,10 +13,33 @@ import json
 
 from tweak_program_helpers import make_parser
 
+#https://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-from-json/33571117#33571117
+def byteify(data, ignore_dicts = False):
+    if isinstance(data, str):
+        return data
 
+    # if this is a list of values, return list of byteified values
+    if isinstance(data, list):
+        return [ byteify(item, ignore_dicts) for item in data ]
+    # if this is a dictionary, return dictionary of byteified keys and values
+    # but only if we haven't already byteified it
+    # DL: Changed - we dont want unicode anywhere...
+    if isinstance(data, dict) and not ignore_dicts:
+        return {
+#            byteify(key, ignore_dicts=True): byteify(value, ignore_dicts=True)
+            byteify(key, ignore_dicts): byteify(value, ignore_dicts)
+            for key, value in data.items() 
+        }
+
+    # python 3 compatible duck-typing
+    # if this is a unicode string, return its string representation
+    if str(type(data)) == "<type 'unicode'>":
+        return data.encode('utf-8')
+
+    # if it's anything else, return it in its original form
+    return data
 
 def create_process(args,func_args):
-
    
    if args.funcname == "merge":
       if args.useErrorDataset:
@@ -79,7 +101,9 @@ def main():
    
    try:
       with open(args.funcargs) as json_file:
-         json_data = json.load(json_file)
+         string = json_file.read()
+         json_data = json.loads(string)
+         json_data = byteify(json_data)
    except Exception as e:
       print("Error opening file "+args.funcargs)
       sys.exit(1)
