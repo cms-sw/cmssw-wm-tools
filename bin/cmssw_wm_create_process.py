@@ -63,6 +63,7 @@ def create_process(args,func_args):
    else:
       try:
          from Configuration.DataProcessing.GetScenario import getScenario
+         scenario = func_args['scenario']
          scenarioInst = getScenario(scenario)
       except Exception as ex:
          msg = "Failed to retrieve the Scenario named "
@@ -72,7 +73,9 @@ def create_process(args,func_args):
          print(msg)
          raise ex
       try:
-         process = getattr(scenarioInst, args.funcname)(**func_args)
+         gt= func_args['globalTag']
+         del func_args['globalTag']
+         process = getattr(scenarioInst, args.funcname)(gt, **func_args)
       except Exception as ex:
          msg = "Failed to load process from Scenario %s (%s)." % (scenario, scenarioInst)
          print(msg)
