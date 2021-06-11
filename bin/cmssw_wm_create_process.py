@@ -73,9 +73,15 @@ def create_process(args,func_args):
          print(msg)
          raise ex
       try:
-         gt= func_args['globalTag']
-         del func_args['globalTag']
-         process = getattr(scenarioInst, args.funcname)(gt, **func_args)
+         my_func=getattr(scenarioInst, args.funcname)
+         arg_names=my_func.func_code.co_varnames[1:1+my_func.func_code.co_argcount]
+         #the last arg should be **args - get the others from the dictionary passed in
+         arg_names=arg_names[:-1]
+         call_func_args=[]
+         for name in arg_names:
+            call_func_args.append(func_args[name])
+            del func_args[name]
+         process = my_func(*call_func_args, **func_args)
       except Exception as ex:
          msg = "Failed to load process from Scenario %s (%s)." % (scenario, scenarioInst)
          print(msg)
