@@ -3,7 +3,7 @@
 
 """:"
 
-python_cmd="python2"
+python_cmd="python"
 python3 -c "from FWCore.PythonFramework.CmsRun import CmsRun" 2>/dev/null && python_cmd="python3"
 exec ${python_cmd} $0 ${1+"$@"}
 
