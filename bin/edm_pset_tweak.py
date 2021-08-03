@@ -1,4 +1,14 @@
-#!/usr/bin/env python
+#!/bin/sh
+
+
+""":"
+
+python_cmd="python2"
+python3 -c "from FWCore.PythonFramework.CmsRun import CmsRun" 2>/dev/null && python_cmd="python3"
+exec ${python_cmd} $0 ${1+"$@"}
+
+"""
+
 # usage
 # edm_pset_tweak.py --input_pkl RunPromptRecoCfg.pkl --output_pkl ouput.pkl --json tweaks.json
 #
