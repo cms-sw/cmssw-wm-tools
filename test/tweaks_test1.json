@@ -1,1 +1,1 @@
-{ "maxEvents.input" : 100}
+{ "maxEvents.input" : 100, "maxEvents.dud" : "customTypeCms.untracked.uint32(15)" }

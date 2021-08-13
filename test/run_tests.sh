@@ -19,6 +19,7 @@ if [ $? -eq 0 ]
 then
   echo "Tweak applied ok, lets check it"
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.input --output out_param.json
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.dud --output out_param.json
 else
   echo "Failed to apply tweak" >&2
   exit 1
