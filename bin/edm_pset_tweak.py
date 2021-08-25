@@ -55,7 +55,7 @@ def convert_unicode_to_str(data):
             data = str(data) 
     return data
 
-def apply_tweak(process, key, value, skip_if_set):
+def apply_tweak(process, key, value, skip_if_set, create_untracked_psets):
     value = convert_unicode_to_str(value)
     # Allow setting specific types from json
     if isinstance(value, str):
@@ -68,9 +68,12 @@ def apply_tweak(process, key, value, skip_if_set):
         key_split = key_split[1:]
     for p in key_split[:-1]:
         if not hasattr(param,p):
-            return 1
+            if create_untracked_psets: 
+               setattr(param, p, cms.untracked.PSet())
+            else:
+               setattr(param, p, cms.PSet())
         param = getattr(param, p)
-        if param is None:
+        if param is None: #i guess this can never happen
             return 1
     if skip_if_set and hasattr(param,key_split[-1]): 
        print("Attribute already set "+key+". Not changing")
@@ -90,6 +93,7 @@ def init_argparse():
     parser.add_argument('--output_pkl', nargs='+', required=False)
     parser.add_argument('--allow_failed_tweaks', action='store_true')
     parser.add_argument('--skip_if_set', action='store_true')
+    parser.add_argument('--create_untracked_psets', action='store_true')
     return parser
 
 
@@ -139,7 +143,7 @@ def main():
                 sys.exit(1)
 
         for tweak in tweaks:
-            err_val = apply_tweak(process, tweak[0], tweak[1],args.skip_if_set)
+            err_val = apply_tweak(process, tweak[0], tweak[1],args.skip_if_set, args.create_untracked_psets )
             if err_val != 0:
                 print("Tweak not applied "+tweak[0]+" "+str(tweak[1]))
                 if not args.allow_failed_tweaks:

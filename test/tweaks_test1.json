@@ -1,1 +1,4 @@
-{ "maxEvents.input" : 100, "maxEvents.dud" : "customTypeCms.untracked.uint32(15)" }
+{ "maxEvents.input" : 100, 
+  "maxEvents.dud" : "customTypeCms.untracked.uint32(15)",
+  "maxSecondsUntilRampdown.input" : "customTypeCms.untracked.uint32(15)"
+ }

@@ -20,6 +20,20 @@ then
   echo "Tweak applied ok, lets check it"
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.input --output out_param.json
   $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.dud --output out_param.json
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxSecondsUntilRampdown.input --output out_param.json
+else
+  echo "Failed to apply tweak" >&2
+  exit 1
+fi
+
+echo "Testing... param tweak adding untracked"
+$test_dir/../bin/edm_pset_tweak.py --json $test_dir/tweaks_test1.json --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --create_untracked_psets
+if [ $? -eq 0 ]
+then
+  echo "Tweak applied ok, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.input --output out_param.json
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxEvents.dud --output out_param.json
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param maxSecondsUntilRampdown.input --output out_param.json
 else
   echo "Failed to apply tweak" >&2
   exit 1
