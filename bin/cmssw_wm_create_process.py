@@ -83,7 +83,7 @@ def create_process(args,func_args):
          raise ex
       try:
          my_func=getattr(scenarioInst, args.funcname)
-         arg_names=my_func.func_code.co_varnames[1:1+my_func.func_code.co_argcount]
+         arg_names=my_func.__code__.co_varnames[1:1+my_func.__code__.co_argcount]
          #the last arg should be **args - get the others from the dictionary passed in
          arg_names=arg_names[:-1]
          call_func_args=[]
