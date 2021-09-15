@@ -58,10 +58,12 @@ def convert_unicode_to_str(data):
 def apply_tweak(process, key, value, skip_if_set, create_untracked_psets):
     value = convert_unicode_to_str(value)
     # Allow setting specific types from json
+    iscmsType=False
     if isinstance(value, str):
         value_split = value.split('.')
         if value_split[0] == "customTypeCms":
             value = eval('cms.{0}'.format('.'.join(value_split[1:])))
+            iscmsType=True
     key_split = key.split('.')
     param=process
     if key_split[0] == "process":
@@ -78,7 +80,11 @@ def apply_tweak(process, key, value, skip_if_set, create_untracked_psets):
     if skip_if_set and hasattr(param,key_split[-1]): 
        print("Attribute already set "+key+". Not changing")
        return 0
-    setattr(param,key_split[-1],value)
+    if iscmsType or hasattr(param,key_split[-1]):
+       setattr(param,key_split[-1],value)
+    else:
+       print("Attribute not set, to set it you must give a cms variable type")
+       return 1
     print("Set attribute "+key+" to "+str(getattr(param,key_split[-1])))
     return 0
 
