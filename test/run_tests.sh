@@ -136,6 +136,22 @@ fi
 echo ""
 rm -f pset_new.pkl
 
+# do custom timeout
+echo "Testing... custom timeout"
+$test_dir/../bin/cmssw_enable_custom_timeout.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --timeout 500
+
+if [ $? -eq 0 ]
+then
+  echo "Custom timeout applied correctly, lets check it"
+  $test_dir/get_pset_param.py --input_pkl $test_dir/reco.pkl pset_new.pkl --param SiteLocalConfigService.overrideSourceTimeout --output out_timeout.json
+else
+  echo "Custom timeout to fix disabled source error" >&2
+  exit 1
+fi
+
+echo ""
+rm -f pset_new.pkl
+
 # do dqmsaver
 echo "Testing...dqmsaver"
 $test_dir/../bin/cmssw_handle_dqm_filesaver.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --multiRun --datasetName myDataset
