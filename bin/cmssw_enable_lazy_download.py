@@ -27,8 +27,6 @@ def get_source_type(process):
         return None
     if hasattr(inputSource, "type_"):
         return inputSource.type_()
-    if hasattr(inputSource, "_TypedParameterizable__type"):
-        return inputSource._TypedParameterizable__type
     return None
 
 def handle_lazy(process, args):
