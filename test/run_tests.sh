@@ -39,7 +39,6 @@ else
   exit 1
 fi
 
-
 rm -f pset_new.pkl
 echo "Testing... param tweak without override"
 $test_dir/../bin/edm_pset_tweak.py --json $test_dir/tweaks_test1.json --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl --skip_if_set
@@ -123,6 +122,12 @@ rm -f pset_new.pkl
 # do lazy download
 echo "Testing... lazy download"
 $test_dir/../bin/cmssw_enable_lazy_download.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl 
+echo "Testing... lazy download for LHE workflow - LHE step"
+$test_dir/../bin/cmssw_enable_lazy_download.py --input_pkl $test_dir/lhe.pkl --output_pkl pset_new.pkl --check_lhe_workflow
+echo "With lazy-download = $(diff lhe.pkl pset_new.pkl | grep lazy | wc -l)"
+echo "Testing... lazy download for LHE workflow - reco step. No change is expected."
+$test_dir/../bin/cmssw_enable_lazy_download.py --input_pkl $test_dir/reco.pkl --output_pkl pset_new.pkl
+echo "With lazy-download = $(diff reco.pkl pset_new.pkl | grep lazy | wc -l)"
 
 if [ $? -eq 0 ]
 then
